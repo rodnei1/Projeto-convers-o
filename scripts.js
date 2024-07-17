@@ -1,199 +1,79 @@
-const convertButton = document.querySelector(".convert-button")
-const currencySelect = document.querySelector(".currency-select")
-const currencySelectTop = document.querySelector(".currency-select-top")
+const convertButton = document.querySelector(".convert-button");
+const currencySelect = document.querySelector(".currency-select");
+const currencySelectTop = document.querySelector(".currency-select-top");
+
+const rates = {
+    "BRL": 1,
+    "USD": 5.2,
+    "EUR": 6.19,
+    "GBP": 6.89
+};
 
 function convertValues() {
-    const inputCurrencyValue = document.querySelector(".input-currency").value
-    const currencyValueToConvert = document.querySelector(".currency-value-to-convert")
-    const currencyValueConverted = document.querySelector(".currency-value")
+    const inputCurrencyValue = document.querySelector(".input-currency").value;
+    const currencyValueToConvert = document.querySelector(".currency-value-to-convert");
+    const currencyValueConverted = document.querySelector(".currency-value");
 
-    const dolarToday = 5.2
-    const euroToday = 6.19
-    const libraToday = 6.89
+    const fromCurrency = currencySelectTop.value;
+    const toCurrency = currencySelect.value;
 
-    if (currencySelect.value == "dolar") {
-        currencyValueConverted.innerHTML = new Intl.NumberFormat("en-US", {
-            style: "currency",
-            currency: "USD"
-        }).format(inputCurrencyValue / dolarToday)
-    }
 
-    if (currencySelect.value == "euro") {
-        currencyValueConverted.innerHTML = new Intl.NumberFormat("de-DE", {
-            style: "currency",
-            currency: "EUR"
-        }).format(inputCurrencyValue / euroToday)
-    }
-
-    if (currencySelect.value == "libra") {
-        currencyValueConverted.innerHTML = new Intl.NumberFormat("de-DE", {
-            style: "currency",
-            currency: "GBP"
-        }).format(inputCurrencyValue / libraToday)
-    }
+    const inputAmount = parseFloat(inputCurrencyValue);
+    const convertedValue = (inputAmount / rates[fromCurrency]) * rates[toCurrency];
 
     currencyValueToConvert.innerHTML = new Intl.NumberFormat("pt-BR", {
         style: "currency",
-        currency: "BRL"
-    }).format(inputCurrencyValue)
+        currency: fromCurrency
+    }).format(inputAmount);
 
-}
-
-if (currencySelect.value == "real") {
-    currencyValueConverted.innerHTML = new Intl.NumberFormat("pt-BR", {
-        style: "currency",
-        currency: "BRL"
-    }).format(inputCurrencyValue)
-}
-
-if(currencySelect.value == "dolar") {
-    currencyValueConverted.innerHTML = new Intl.NumberFormat("en-US", {
-        style: "currency",
-        currency: "USD"
-    }).format(inputCurrencyValue / dolarToday)
-}
-
-if(currencySelect.value == "euro") {
     currencyValueConverted.innerHTML = new Intl.NumberFormat("de-DE", {
         style: "currency",
-        currency:"EUR"
-    }).format(inputCurrencyValue / euroToday)
-}
-
-if(currencySelect.value == "libra") {
-    currencyValueToConverted.innerHTML = new Intl.NumberFormat("de-DE", {
-        style: "currency",
-        currency: "GBP"
-    }).format(inputCurrencyValue / libraToday)
-}
-
-if (currencySelectTop.value == "dolar-to" && currencySelect.value == "dolar") {
-    currencyValueConverted.innerHTML = new Intl.NumberFormat("en-US", {
-        style: "currency",
-        currency: "USD"
-    }).format(inputCurrencyValue)
-}
-
-if(currencySelectTop.value == "dolar-to" && currencySelect.value == "real") {
-    currencyValueConverted.innerHTML = new Intl.NumberFormat("pt-BR", {
-        style: "currency",
-        currency: "BRL"
-    }).format(inputCurrencyValue / dolarToday )
-}
-
-if(currencySelectTop.value == "dolar-to" && currencySelect.value == "euro") {
-    currencyValueConverted.innerHTML = new Intl.NumberFormat("de-DE", {
-        style: "currency",
-        currency: "EUR"
-    }).format(inputCurrencyValue / euroToday)
-}
-
-if(currencySelectTop.value == "dolar-to" && currencySelect.value == "libra") {
-    currencyValueConverted.innerHTML = new Intl.NumberFormat("de-DE", {
-        style: "currency",
-        currency: "GBP"
-    }).format(inputCurrencyValue / libraToday)
-}
-
-if(currencySelectTop.value == "euro-to" && currencySelect.value == "euro") {
-    currencyValueConverted.innerHTML = new Intl.NumberFormat("pt-BR", {
-        style: "currency",
-        currency: "EUR"
-    }).format(inputCurrencyValue)
-}
-
-if(currencySelectTop.value == "euro-to" && currencySelect.value == "real") {
-    currencyValueConverted.innerHTML = new Intl.NumberFormat("pt-BR", {
-        style: "currency",
-        currency: "BRL"
-    }).format(inputCurrencyValue / euroToday)
-}
-
-if(currencySelectTop.value == "euro-to" && currencySelect.value == "libra") {
-    currencyValueConverted.innerHTML = new Intl.NumberFormat("de-DE", {
-        style: "currency",
-        currency: "GBP"
-    }).format(inputCurrencyValue / libraToday)
-}
-
-if(currencySelectTop.value == "libra-to" && currencySelect.value == "libra") {
-    currencyValueConverted.innerHTML = new Intl.NumberFormat("de-DE", {
-        style: "currency",
-        currency: "GBP"
-    }).format(inputCurrencyValue)
-}
-
-if(currencySelectTop.value == "libra-to" && currencySelect.value == "real") {
-    currencyValueConverted.innerHTML = new Intl.NumberFormat("pt-BR", {
-        style: "currency",
-        currency: "BRL"
-    }).format(inputCurrencyValue / libraToday)
-}
-
-if(currencySelectTop.value == "libra-to" && currencySelect.value == "dolar") {
-    currencyValueConverted.innerHTML = new Intl.NumberFormat("en-US", {
-        style: "currency",
-        currency: "USD"
-    }).format(inputCurrencyValue / dolarToday)
-}
-
-if(currencySelectTop.value == "libra-to" && currencySelect.value == "euro") {
-    currencyValueConverted.innerHTML = new Intl.NumberFormat("de-DE", {
-        style: "currency",
-        currency: "EUR"
-    }).format(inputCurrencyValue / libraToday)
+        currency: toCurrency
+    }).format(convertedValue);
 }
 
 function changeCurrency() {
-    const currencyName = document.getElementById("currency-name")
-    const currencyImage = document.querySelector(".bandeira-eua")
+    const currencyBottom = document.querySelector(".currency-bottom");
+    const currencyBottomImg = document.querySelector(".bandeira-bottom");
 
-    if (currencySelect.value == "dolar") {
-        currencyName.innerHTML = "Dólar americano"
-        currencyImage.src = "./assets/bandeira-eua.png"
+    if (currencySelect.value == "USD") {
+        currencyBottom.innerHTML = "Dólar Americano";
+        currencyBottomImg.src = "./assets/bandeira-eua.png";
+    } else if (currencySelect.value == "EUR") {
+        currencyBottom.innerHTML = "Euro";
+        currencyBottomImg.src = "./assets/euro2.png";
+    } else if (currencySelect.value == "GBP") {
+        currencyBottom.innerHTML = "Libra";
+        currencyBottomImg.src = "./assets/logo-libra.webp";
+    } else if (currencySelect.value == "BRL") {
+        currencyBottom.innerHTML = "Real Brasileiro";
+        currencyBottomImg.src = "./assets/bandeira-brasil2.jpg";
     }
 
-    if (currencySelect.value == "euro") {
-        currencyName.innerHTML = "Euro"
-        currencyImage.src = "./assets/euro2.png"
-    }
-
-    if (currencySelect.value == "libra") {
-        currencyName.innerHTML = "Libra"
-        currencyImage.src = "./assets/libra44.png"
-    }
-
-    convertValues()
-
+    convertValues();
 }
 
 function changeCurrencyTop() {
-    const currency = document.querySelector(".currecy")
-    const currecyTopImg = document.querySelector(".bandeira-br")
+    const currencyTop = document.querySelector(".currency-top");
+    const currencyTopImg = document.querySelector(".bandeira-top");
 
-    if(currencySelectTop.value == "real-to") {
-        currency.innerHTML = "Real"
-        currecyTopImg.src = "./assets/bandeira-brasil2.jpg"
+    if (currencySelectTop.value == "BRL") {
+        currencyTop.innerHTML = "Real";
+        currencyTopImg.src = "./assets/bandeira-brasil2.jpg";
+    } else if (currencySelectTop.value == "USD") {
+        currencyTop.innerHTML = "Dólar Americano";
+        currencyTopImg.src = "./assets/bandeira-eua.png";
+    } else if (currencySelectTop.value == "EUR") {
+        currencyTop.innerHTML = "Euro";
+        currencyTopImg.src = "./assets/euro2.png";
+    } else if (currencySelectTop.value == "GBP") {
+        currencyTop.innerHTML = "Libra";
+        currencyTopImg.src = "./assets/logo-libra.webp";
     }
 
-    if(currencySelectTop.value == "dolar-to") {
-        currency.innerHTML = "Dólar americano"
-        currecyTopImg.src = "./assets/bandeira-eua.png"
-    }
-
-    if(currencySelectTop.value == "euro-to") {
-        currency.innerHTML = "Euro"
-        currecyTopImg.src = "./assets/Euro2.png"
-    }
-
-    if(currencySelectTop.value == "libra-to") {
-        currency.innerHTML = "Libra"
-        currecyTopImg.src = "./assets/libra44.png"
-    }
-    
-    convertValues()
+    convertValues();
 }
 
-currencySelectTop.addEventListener("change", changeCurrencyTop)
-currencySelect.addEventListener("change", changeCurrency)
-convertButton.addEventListener("click", convertValues)
+currencySelectTop.addEventListener("change", changeCurrencyTop);
+currencySelect.addEventListener("change", changeCurrency);
+convertButton.addEventListener("click", convertValues);

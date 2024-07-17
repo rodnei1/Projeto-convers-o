@@ -11,16 +11,15 @@ body {
     background-repeat: repeat;
 }
 
-.bandeira-br {
-    width: 45px; 
+.bandeira-br, .bandeira-eua, .bandeira-top, .bandeira-bottom{
+    width: 45px;
+    height: auto; 
 }
 
 .arrow {
-    width: 80px;
-}
-
-.bandeira-eua {
-    width: 45px;
+    width: 40px;
+    height: auto;
+    margin: 10px 0 ;
 }
 
 .logo {
